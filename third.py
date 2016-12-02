@@ -1,43 +1,28 @@
-def jump(start_pt, end_pt, count):
-    if start_pt == end_pt:
+def step(s, e, count):
+    if s == e:
         print "Minimum steps required: ", count
 
-    if start_pt > end_pt:
-        start_pt -= 1
+    if s > e:
+        s -= 1
         count += 1
-        jump(start_pt=start_pt, end_pt=end_pt, count=count)
+        step(s=s, e=e, count=count)
 
-    elif start_pt < end_pt:
-        start_pt *= 2
-        count += 1
-        jump(start_pt=start_pt, end_pt=end_pt, count=count)
+    elif s < e:
+        s = s*2
+        count = count + 1
+        step(s=s, e=e, count=count)
 
 
 def main():
-    try:  # Expection handling with try-except-else.
-        test_num = int(input("Enter the number(1-10) of test Cases:"))
-        if test_num < 1 or test_num > 10:
-            raise ValueError  # Raise ValueError as check
-        for num in range(test_num):
-            start_point = int(input("Enter Starting Point(1-1000): "))
-            end_point = int(input("Enter Destination Point(1-1000): "))
-            if start_point <= 0 or start_point > 1000 or end_point <= 0 or end_point > 1000:
-                raise ValueError   # Raise ValueError as check
-            jump(start_point, end_point, count=0)
-
-    except KeyboardInterrupt:
-        print "\nCtrl+c Killed this program.\nGood-Bye."
-
-    except ValueError:
-        print 'Please provide Numerical value & within Specified Range.\n'
-        main()
-
-    except:
-        print 'Something went wrong with the Input.\nPlease Retry.\n'
-        main()
-
-    else:
-        print "\nThank you.\nSee you again."
+    test_num = int(input("Enter the number(1-10) of test Cases:"))
+    if test_num < 1 or test_num > 10:
+		print "Value out of Range"
+    for num in range(test_num):
+        s = int(input("Enter Starting Point(1-1000): "))
+        e = int(input("Enter Destination Point(1-1000): "))
+        if s <= 0 or s > 1000 or e <= 0 or e > 1000:
+			print "Value out of Range"
+			step(s, e,count=0)
 
 if __name__ == '__main__':
     main()
